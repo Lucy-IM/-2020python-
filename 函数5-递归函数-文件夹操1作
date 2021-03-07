@@ -1,0 +1,8 @@
+# eval 执行表达式
+a,b,c=1,2,3
+print('动态执行的函数={}'.format(eval('a*b+c-30')))
+def TestFun():
+    print('我执行了吗?')
+    pass
+# eval('TestFun()') #可以调用函数执行   'TestFun()'相当于一个字符串 但还是可以执行函数。
+# 会执行TestFun()函数  打印-我执行了吗？
