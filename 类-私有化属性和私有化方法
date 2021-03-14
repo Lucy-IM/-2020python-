@@ -1,0 +1,76 @@
+两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问
+1、私有化属性不能在类外面访问
+2、私有化属性可以在类里面访问，修改。
+3、子类不能继承私有化属性。
+
+
+# 使用私有属性的场景
+# 1.把特定的一个属性隐藏起来  不想让类的外部进行直接调用
+# 2.我想保护这个属性 不想让属性的值随意的改变
+# 3.保护这个属性   不想让派生类【子类】去继承
+
+class Person:
+    __hobby='跳舞'  #私有的类属性
+    def __init__(self):
+        self.__name='李四' #加两个下划线 将此属性私有化之后  就不能再外部直接访问了,当然在类的内部是可以防蚊贴
+        self.age=30
+        pass
+    def __str__(self):
+        '''
+        私有化的属性在内部可以使用 self.__name
+        :return:
+        '''
+        return '{}的年龄是{} 爱好是{}'.format(self.__name,self.age,Person.__hobby)
+    def  changeValue(self):
+        Person.__hobby='唱歌'
+class Student(Person):
+    def printInfo(self):
+        # print(self.__name)  #在此访问父类中的私有属性 可以吗?   不可以
+        print(self.age)
+    pass
+
+
+stu=Student()
+# print(stu.__name)
+stu.printInfo()
+stu.changeValue() #修改私有属性的值
+print(stu)
+# print(stu.__hobby) #实例对象访问类属性
+# print(Person.__hobby) #实例对象访问类属性
+
+# xl=Person()
+# # print(xl.__name) #是通过类对象 在外部访问的 不能访问私有属性
+# print(xl)
+
+# 小结：
+# 1 私有化的【实例】属性 不能再外部直接的访问  可以在类的内部随意的使用
+# 2.子类不能继承父类的私有化属性【只能继承父类公共的属性和行为】
+# 3. 在属性名的前面直接加‘ __’  就可以变为私有化了
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+私有化方法
+class Animal:
+    def __eat(self):
+        print('吃东西')
+        pass
+    def run(self):
+        self.__eat() #在此调用私有化的方法
+        print('飞快的跑')
+    pass
+
+class Bird(Animal):
+    pass
+
+b1=Bird()
+# print(b1.eat())
+# b1.eat()
+b1.run()
+
+私有化方法一般是类内部调用，子类不能继承，外部不能调用。
+
+单下划线、双下划线、头尾双下划线说明
+_xxx 前面加一个下划线，以单下划线开头的表示的是 protected 类型的变量，即保护类型只能允许其本身与子类进行访问，不能使用from xxx import * 的方式导入。
+__xxx__ 前后两个下滑线，魔法方法，一般是python自有，开发者不要创建这类型的方法。
+xxx_ 后面单下滑线，避免属性名与python关键字冲突。
+
