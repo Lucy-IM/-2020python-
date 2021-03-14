@@ -9,11 +9,11 @@ class  People:
     def change_country(cls,data):
         cls.country=data #修改类属性的值  在类方法中
         pass
-    @staticmethod
+    @staticmethod       # 类对象所拥有的方法，需要用@staticmethod来表示静态方法，静态方法不需要任何参数
     def getData():
         return People.country  #通过类对象去引用
         pass
-    @staticmethod
+    @staticmethod     
     def add(x,y):
         return x+y
         pass
@@ -53,4 +53,9 @@ class TimeTest:
 print(TimeTest.showTime())
 t=TimeTest(2,10,15)
 print(t.showTime()) #没有必要通过这种方式去访问 静态方法
+
+
+1、类方法的第一个参数是类对象cls，通过cls引用的类对象的属性和方法
+2、实例方法的第一个参数是实例对象self，通过self引用的可能是类属性、也有可能是实例属性(这个需要具体分析)，不过在存在相同名称的类属性和实例属性的情况下，实例属性优先级更高。
+3、静态方法中不需要额外定义参数，因此在静态方法中引用类属性的话，必须通过类对象来引用。
 
